@@ -1,0 +1,102 @@
+{
+  "name": "novanotif",
+  "version": "1.0.0",
+  "description": "跨平台桌面通知系统，支持Markdown和数学公式渲染",
+  "main": "src/main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "keywords": [
+    "notification",
+    "desktop",
+    "markdown",
+    "katex",
+    "electron"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^14.0.0",
+    "katex": "^0.16.8",
+    "markdown-it": "^13.0.1",
+    "markdown-it-katex": "^2.0.3",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "electron": "^36.3.1",
+    "electron-builder": "^24.16.0"
+  },
+  "build": {
+    "appId": "com.novanotif.app",
+    "productName": "novanotif",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.png"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.png"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icons/icon.png",
+      "category": "Utility"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}-${os}-${arch}.${ext}"
+    },
+    "appImage": {
+      "artifactName": "${productName}-AppImage-${version}-${arch}.${ext}"
+    },
+    "dmg": {
+      "artifactName": "${productName}-Installer-${version}-${arch}.${ext}"
+    }
+  }
+}
